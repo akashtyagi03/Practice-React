@@ -1,30 +1,31 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import './App.css'
-import { use } from 'react';
 
 function App() {
-  const inputref = useRef(0);
+  const [counter, setCounter] = useState(0);
+  const [value, setValue] = useState(0);
 
-  function handleclick(){
-    inputref.current.focus();
-  }
-  
+ function expensivetask(num){
+  console.log("inside expensive function");
+  for(let i=0; i<1000000000; i++){}
+  return num*2;
+ }
+  const doublevalue = useMemo(() => expensivetask(value), [value]);
+
   return (
     <div>
-      <h1>form submission</h1>
-      <div>
-        <input type="text"
-        placeholder='enter name here'
-        ref={inputref}
-        />
-        <button onClick={handleclick}>
-          click me 
-        </button>
-        <input type="text"
-        placeholder='enter name here'
-        ref={inputref}
-        />
-      </div>
+    <h1>counter app</h1>
+    <p>counter is : {counter}</p>
+
+    <button onClick={()=>{setCounter(counter+1)}}>increment</button>
+
+    <div>
+      <input type="number"
+      value={value}
+      placeholder='enter number for doubling'
+      onChange={(e)=>{setValue(e.target.value)}} />
+      <h1>double value is : {doublevalue}</h1>
+    </div>
     </div>
   )
 }
