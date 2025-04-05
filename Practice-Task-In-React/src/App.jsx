@@ -1,36 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { use } from 'react';
 
 function App() {
-  const [ count, setCount ] = useState();
+  const inputref = useRef(0);
+
+  function handleclick(){
+    inputref.current.focus();
+  }
   
-
-
   return (
-    <>
-      <div style={{ 
-  backgroundColor: count || "white", // Entire div changes color
-  padding: "20px",
-  minHeight: "200px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center"
-}}>
-        <h1>change color of div</h1>
-        <input type="text" 
-        value={count}
-        placeholder='Enter color here'
-        onChange={(e) => setCount(e.target.value)}
+    <div>
+      <h1>form submission</h1>
+      <div>
+        <input type="text"
+        placeholder='enter name here'
+        ref={inputref}
         />
-        {/* {count && <div style={{ backgroundColor: count, width: "200px", 
-      height: "100px", 
-      marginTop: "10px" }}></div>}
-        {!count && <div style={{ backgroundColor: 'white' }}></div>} */}
-        
+        <button onClick={handleclick}>
+          click me 
+        </button>
+        <input type="text"
+        placeholder='enter name here'
+        ref={inputref}
+        />
       </div>
-    </>
+    </div>
   )
 }
 
