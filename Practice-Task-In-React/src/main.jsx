@@ -28,6 +28,7 @@ import Contact from './component/contact us/contact-us.jsx'
     //     ]
     // }
 // ])
+
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path='/' element={<Layout/>}>
