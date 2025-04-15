@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Header from './component/Header';
+import Main from './component/Main';
 
 function App() {
   const [showText, setShowText] = useState(false);
@@ -6,7 +8,8 @@ function App() {
 
   return (
    <div>
-
+    <Header/>
+    <Main/>
    </div>
   );
 }
