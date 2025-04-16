@@ -11,6 +11,7 @@ function App() {
     <Header/>
     <Main/>
     <p>here something missing</p>
+    <p>here something missing</p>
    </div>
   );
 }
