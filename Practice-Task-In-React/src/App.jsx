@@ -10,6 +10,7 @@ function App() {
    <div>
     <Header/>
     <Main/>
+    <p>here something missing</p>
    </div>
   );
 }
