@@ -1,25 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import Button from './component/Button'
+import Todoform from './component/Todoform.jsx'
+import Todolist from './component/Todolist';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todo, setTodo] = useState([]);
+  
+  const addTodo = (text) => {
+    const newTodo = { id: Date.now(), text };
+    setTodo([...todo, newTodo]);
+  };
 
-  function handleincrease(){
-    setCount(count + 1)
-  }
-  function handledeacrease(){
-    setCount(count - 1)
-  }
-
+  const deleteTodo = (id) => {
+    setTodo(todo.filter(todo => todo.id !== id));
+  };
 
 
   return (
     <>
-    <Button onClick={handleincrease} para={"increment"}/>
-    <Button onClick={handledeacrease} para={"decrement"}/>
-    <br />
-    <p>count: {count}</p>
+    <h2>Todo app</h2>
+    <Todoform onadd={addTodo}/>
+    <Todolist todo={todo} ondelete={deleteTodo}/>
+
     </>
   )
 }
