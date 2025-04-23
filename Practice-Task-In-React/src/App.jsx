@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import Header from './component/Header';
-import Main from './component/Main';
+import Greeting from "./component/Greeting";
+import { Language } from "./component/Language";
+import { useState } from "react";
+import Languageswitch from "./component/Languageswitch";
 
 function App() {
-
-
+  const [language, setLanguage] = useState("en")
+ 
   return (
-   <div>
-    <Header/>
-    <Main/>
-   </div>
+    <Language.Provider value={{language, setLanguage}}>
+      <Greeting/>
+      <Languageswitch/>
+    </Language.Provider>
   );
 }
 
