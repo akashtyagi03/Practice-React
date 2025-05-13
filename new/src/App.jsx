@@ -1,39 +1,36 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState, createContext } from 'react'
 import './App.css'
-import Weathercard from './component/Weathercard'
+import Studentlist from './component/Nameinput';
+import Nameinput from './component/Nameinput';
+import Display from './component/Display';
 
-function App() {
-  const [city, setCity] = useState("")
-  const [temp, setTemp] = useState("30%")
-  const [condition, setCondition] = useState("sunny")
-  const [text, setText] = useState("")
-
-  const changecity = () => {
-    setCity(text)
-    setText("")
+  function App() {
+    const [name, setName] = useState("")
+    const [roll, setRoll] = useState("")
+    const [submitted, setSubmitted] = useState(null)
+  
+    function handlename(e){
+      setName(e.target.value);
+    }
+    function handleroll(e){
+      setRoll(e.target.value);
+    }
+    function handlesubmit(e){
+      e.preventDefault();
+      setSubmitted({name, roll})
+      setName("") 
+      setRoll("")
+    }
+    return (
+      <>
+      <form onSubmit={handlesubmit}>
+        <Nameinput onChange={handlename} value={name} type={"text"}/>
+        <Nameinput onChange={handleroll} value={roll} type={"number"}/>
+        <button type='submit' disabled={!name || !roll}>submit</button>
+      </form>
+      {submitted && <Display name={submitted.name} roll={submitted.roll}/>}
+      </>
+    )
   }
 
-  return (
-    <>
-      <h2>Todo app</h2>
-      <div>
-
-        <input type="text" value={text}
-          placeholder='enter city name'
-          onChange={(e) => { setText(e.target.value) }} />
-        <button onClick={changecity}>search</button>
-      </div>
-      <br />
-
-      <Weathercard city={city} temprature={temp} condition={condition} />
-      {/* <br />
-    <Weathercard city={city} temprature={temp} condition={condition}/>
-    <br />
-    <Weathercard city={city} temprature={temp} condition={condition}/>
-    <br />
-    <Weathercard city={city} temprature={temp} condition={condition}/> */}
-    </>
-  )
-}
-
-export default App
+  export default App
