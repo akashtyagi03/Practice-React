@@ -1,36 +1,25 @@
-import { use, useEffect, useState, createContext } from 'react'
+import { createContext, useState } from 'react'
 import './App.css'
-import Studentlist from './component/Nameinput';
-import Nameinput from './component/Nameinput';
-import Display from './component/Display';
+import Child1 from './component/Child1'
 
-  function App() {
-    const [name, setName] = useState("")
-    const [roll, setRoll] = useState("")
-    const [submitted, setSubmitted] = useState(null)
-  
-    function handlename(e){
-      setName(e.target.value);
-    }
-    function handleroll(e){
-      setRoll(e.target.value);
-    }
-    function handlesubmit(e){
-      e.preventDefault();
-      setSubmitted({name, roll})
-      setName("") 
-      setRoll("")
-    }
-    return (
-      <>
-      <form onSubmit={handlesubmit}>
-        <Nameinput onChange={handlename} value={name} type={"text"}/>
-        <Nameinput onChange={handleroll} value={roll} type={"number"}/>
-        <button type='submit' disabled={!name || !roll}>submit</button>
-      </form>
-      {submitted && <Display name={submitted.name} roll={submitted.roll}/>}
-      </>
-    )
-  }
+const Usercontext = createContext();
 
-  export default App
+function App() {
+  const [count, setCount] = useState("hello there")
+
+  const massage = "hi there";
+
+  return (
+    <>
+    <Usercontext.Provider value={massage}>
+      <div>
+      <h1>App Component</h1>
+      <Child1/>
+    </div>
+    </Usercontext.Provider>
+    </>
+  )
+}
+
+export default App
+export {Usercontext}
